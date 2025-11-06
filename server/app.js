@@ -3,12 +3,13 @@ const app = express();
 require("dotenv").config();
 const connection = require("./config/db");
 const auth= require("./routes/authRoute");
+const task= require("./routes/taskRoute");
 
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use("/api/auth",auth );
-// app.use("/api/tasks")
+app.use("/api/tasks",task);
 
 // app.get("/", (req, res) => {
 //   res.send("test api working");
