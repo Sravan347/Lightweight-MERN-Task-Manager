@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import API from '../src/api';
 import { useNavigate } from 'react-router-dom';
 
@@ -31,6 +32,8 @@ export default function Register(){
         <div><input name="password" placeholder="Password" type="password" value={form.password} onChange={onChange}/></div>
         <button type="submit">Register</button>
       </form>
+      <h2>if u have a account</h2>
+      <Link to="/login">Login</Link>
     </div>
   );
 }

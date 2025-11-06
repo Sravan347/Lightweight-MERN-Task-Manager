@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+
 import API from '../src/api';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Login(){
   const [form, setForm] = useState({ email:'', password:''});
@@ -30,6 +31,8 @@ export default function Login(){
         <div><input name="password" placeholder="Password" type="password" value={form.password} onChange={onChange}/></div>
         <button type="submit">Login</button>
       </form>
+      <h2>you dont have any account</h2>
+      <Link to="/register">Register</Link>
     </div>
   );
 }
