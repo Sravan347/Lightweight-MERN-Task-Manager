@@ -10,7 +10,7 @@ Simple MERN stack task manager with JWT auth.
 - Simple React frontend storing JWT in localStorage
 
 ## Repo structure
-- `backend/` - Express API (MongoDB + Mongoose)
+- `server/` - Express API (MongoDB + Mongoose)
 - `frontend/` - React app
 
 ## Setup
