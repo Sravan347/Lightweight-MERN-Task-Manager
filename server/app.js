@@ -8,6 +8,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use("/api/auth",auth );
+// app.use("/api/tasks")
 
 // app.get("/", (req, res) => {
 //   res.send("test api working");
