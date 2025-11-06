@@ -30,8 +30,26 @@ const getTasks = async (req, res) => {
     res.status(500).send("Server error");
   }
 };
+//update tasks
+const updateTask = async (req, res) => {
+  try {
+    const { title, status } = req.body;
+    const task = await Task.findById(req.params.id);
+    if (!task) return res.status(404).json({ msg: 'Task not found' });
+    if (task.user.toString() !== req.user.id) return res.status(401).json({ msg: 'Not authorized' });
+
+    if (title !== undefined) task.title = title;
+    if (status !== undefined) task.status = status;
+    await task.save();
+    res.json(task);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server error');
+  }
+};
 
 module.exports = {
   createTask,
   getTasks,
+  updateTask,
 };
