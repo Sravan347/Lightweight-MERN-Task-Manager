@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import AddTaskForm from '../components/AddTaskForm';
 import TaskItem from '../components/TaskItem';
 
-export default function Tasks(){
+export default function Tasks() {
   const [tasks, setTasks] = useState([]);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
@@ -16,7 +16,6 @@ export default function Tasks(){
       return;
     }
     fetchTasks();
-    
   }, []);
 
   const fetchTasks = async () => {
@@ -43,7 +42,7 @@ export default function Tasks(){
   const updateTask = async (id, updates) => {
     try {
       const res = await API.put(`/tasks/${id}`, updates);
-      setTasks(prev => prev.map(t => t._id === id ? res.data : t));
+      setTasks(prev => prev.map(t => (t._id === id ? res.data : t)));
     } catch (err) {
       setError('Failed to update');
     }
@@ -58,30 +57,45 @@ export default function Tasks(){
     }
   };
 
-  const logout = () => {
-    localStorage.removeItem('token');
-    navigate('/login');
-  };
+ 
 
   return (
-    <div>
-      <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
-        <h2>Your Tasks</h2>
-        <div>
-          <button onClick={logout}>Logout</button>
+    <div className="min-h-screen bg-gradient-to-br from-blue-100 via-white to-blue-50 p-6">
+      <div className="max-w-3xl mx-auto bg-white shadow-lg rounded-2xl p-6">
+        {/* Header */}
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-3xl font-bold text-blue-600">Your Tasks</h2>
+          
         </div>
-      </div>
 
-      <AddTaskForm onAdd={addTask} />
-      {error && <div style={{color:'red'}}>{error}</div>}
-      <div>
-        {tasks.length === 0 ? <p>No tasks yet.</p> :
-          tasks.map(task => (
-            <TaskItem key={task._id} task={task} onUpdate={updateTask} onDelete={deleteTask} />
-          ))
-        }
+        {/* Add Task Form */}
+        <div className="mb-6">
+          <AddTaskForm onAdd={addTask} />
+        </div>
+
+        {/* Error Message */}
+        {error && (
+          <div className="bg-red-100 text-red-700 border border-red-300 px-4 py-2 rounded-md mb-4 text-sm text-center">
+            {error}
+          </div>
+        )}
+
+        {/* Task List */}
+        <div className="space-y-3">
+          {tasks.length === 0 ? (
+            <p className="text-gray-500 text-center py-6">No tasks yet.</p>
+          ) : (
+            tasks.map(task => (
+              <TaskItem
+                key={task._id}
+                task={task}
+                onUpdate={updateTask}
+                onDelete={deleteTask}
+              />
+            ))
+          )}
+        </div>
       </div>
     </div>
   );
 }
-
