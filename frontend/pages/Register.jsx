@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import API from '../src/api';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import API from "../src/api";
 
 export default function Register() {
-  const [form, setForm] = useState({ name: '', email: '', password: '' });
+  const [form, setForm] = useState({ name: "", email: "", password: "" });
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  const onChange = e => setForm({ ...form, [e.target.name]: e.target.value });
+  const onChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-  const onSubmit = async e => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     setError(null);
     try {
-      const res = await API.post('/auth/register', form);
-      localStorage.setItem('token', res.data.token);
-      navigate('/tasks');
+      const res = await API.post("/auth/register", form);
+      localStorage.setItem("token", res.data.token);
+      navigate("/tasks");
     } catch (err) {
-      setError(err.response?.data?.msg || 'Registration failed');
+      setError(err.response?.data?.msg || "Registration failed");
     }
   };
 

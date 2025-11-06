@@ -1,28 +1,24 @@
-import React from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import React from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Nav = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    navigate('/login');
+    localStorage.removeItem("token");
+    navigate("/login");
   };
 
-  
-  const isHome = location.pathname === '/';
+  const isHome = location.pathname === "/";
 
   return (
     <nav className="bg-blue-600 text-white px-6 py-4 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
-        
         <h1 className="text-2xl font-bold tracking-wide">Task Manager</h1>
 
-    
         <div className="flex items-center space-x-6">
-          
           {!isHome && (
             <Link
               to="/"
@@ -46,7 +42,6 @@ const Nav = () => {
             Register
           </Link>
 
-         
           {!isHome && token && (
             <button
               onClick={handleLogout}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export default function TaskItem({ task, onUpdate, onDelete }) {
   return (
@@ -7,14 +7,16 @@ export default function TaskItem({ task, onUpdate, onDelete }) {
       <div>
         <strong
           className={`block text-lg ${
-            task.status === 'completed' ? 'line-through text-gray-500' : 'text-gray-800'
+            task.status === "completed"
+              ? "line-through text-gray-500"
+              : "text-gray-800"
           }`}
         >
           {task.title}
         </strong>
         <div
           className={`text-sm ${
-            task.status === 'completed' ? 'text-green-600' : 'text-yellow-600'
+            task.status === "completed" ? "text-green-600" : "text-yellow-600"
           }`}
         >
           {task.status}
@@ -26,21 +28,21 @@ export default function TaskItem({ task, onUpdate, onDelete }) {
         <button
           onClick={() =>
             onUpdate(task._id, {
-              status: task.status === 'pending' ? 'completed' : 'pending',
+              status: task.status === "pending" ? "completed" : "pending",
             })
           }
           className={`px-3 py-1 rounded-lg text-sm font-medium transition-colors ${
-            task.status === 'pending'
-              ? 'bg-green-500 hover:bg-green-600 text-white'
-              : 'bg-yellow-500 hover:bg-yellow-600 text-white'
+            task.status === "pending"
+              ? "bg-green-500 hover:bg-green-600 text-white"
+              : "bg-yellow-500 hover:bg-yellow-600 text-white"
           }`}
         >
-          {task.status === 'pending' ? 'Mark Done' : 'Mark Pending'}
+          {task.status === "pending" ? "Mark Done" : "Mark Pending"}
         </button>
 
         <button
           onClick={() => {
-            const newTitle = prompt('Edit title', task.title);
+            const newTitle = prompt("Edit title", task.title);
             if (newTitle !== null) onUpdate(task._id, { title: newTitle });
           }}
           className="px-3 py-1 bg-blue-500 hover:bg-blue-600 text-white rounded-lg text-sm font-medium transition-colors"

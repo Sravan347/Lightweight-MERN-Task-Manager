@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 export default function AddTaskForm({ onAdd }) {
-  const [title, setTitle] = useState('');
+  const [title, setTitle] = useState("");
 
   const submit = (e) => {
     e.preventDefault();
     if (!title.trim()) return;
     onAdd(title.trim());
-    setTitle('');
+    setTitle("");
   };
 
   return (
