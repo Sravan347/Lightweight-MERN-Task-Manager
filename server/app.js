@@ -1,12 +1,26 @@
-const express = require('express')
-const app = express()
-const PORT = process.env.PORT || 3000
+const express = require("express");
+const app = express();
+require("dotenv").config();
+const connection = require("./config/db");
 
+const PORT = process.env.PORT || 3000;
 
-app.get('/',(req,res)=>{
-    res.send('test api working')
-})
+app.use(express.json());
 
-app.listen(PORT,()=>{
-    console.log(`Server is running on port ${PORT}`)
-})
+// app.get("/", (req, res) => {
+//   res.send("test api working");
+// });
+
+const startServer = async () => {
+  try {
+    await connection(process.env.MONGO_URI);
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
+  } catch (error) {
+    console.error("Database connection failed", error);
+   
+  }
+};
+
+startServer();
